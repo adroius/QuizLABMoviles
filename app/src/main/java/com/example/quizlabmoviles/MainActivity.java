@@ -44,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
         changeFragment(fragmentInicial);
     }
 
+    public void preguntaNO(View view){
+        TextView textView=findViewById(R.id.ayuda);
+        textView.setText("¿Seguro?");
+    }
+    public void preguntaSI(View view){
+        TextView textView=findViewById(R.id.ayuda);
+        textView.setText("El juego trata de acertar las maximas preguntas posibles. Cada acierto te sumará 5 puntos, y cada fallo te restará 2.");
+    }
+
     public void comprobar(View view) {
         switch (numberFragment) {
             case 1:

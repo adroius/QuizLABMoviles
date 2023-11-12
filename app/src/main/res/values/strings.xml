@@ -45,4 +45,8 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="reiniciar_quiz">REINICIAR QUIZ</string>
+    <string name="necesitas_ayuda">¿Necesitas ayuda?</string>
+    <string name="si">SI</string>
+    <string name="no">NO</string>
+    <string name="interrogacion">interrogacion</string>
 </resources>
