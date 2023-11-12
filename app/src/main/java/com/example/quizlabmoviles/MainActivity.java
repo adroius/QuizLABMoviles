@@ -17,6 +17,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.quizlabmoviles.databinding.PantallaAyudaBinding;
+
 public class MainActivity extends AppCompatActivity {
 
     private FragmentInicial fragmentInicial;
@@ -52,6 +54,22 @@ public class MainActivity extends AppCompatActivity {
         TextView textView=findViewById(R.id.ayuda);
         textView.setText("El juego trata de acertar las maximas preguntas posibles. Cada acierto te sumará 5 puntos, y cada fallo te restará 2.");
     }
+    public void ayuda(View view){
+        setContentView(R.layout.pantalla_ayuda);
+    }
+
+    public void atras(View view){
+        setContentView(R.layout.pregunta);
+        fragmentInicial = new FragmentInicial();
+        fragmentPregunta1 = new FragmentPregunta1();
+        fragmentPregunta2 = new FragmentPregunta2();
+        fragmentPregunta3 = new FragmentPregunta3();
+        fragmentPregunta4 = new FragmentPregunta4();
+        fragmentPregunta5 = new FragmentPregunta5();
+        fragmentError = new FragmentError();
+        changeFragment(fragmentInicial);
+    }
+
 
     public void comprobar(View view) {
         switch (numberFragment) {
