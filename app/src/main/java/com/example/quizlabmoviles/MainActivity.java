@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.quizlabmoviles.databinding.PantallaAyudaBinding;
 
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pregunta);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         fragmentInicial = new FragmentInicial();
         fragmentPregunta1 = new FragmentPregunta1();
         fragmentPregunta2 = new FragmentPregunta2();
@@ -61,15 +64,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void atras(View view){
-        setContentView(R.layout.pregunta);
-        fragmentInicial = new FragmentInicial();
-        fragmentPregunta1 = new FragmentPregunta1();
-        fragmentPregunta2 = new FragmentPregunta2();
-        fragmentPregunta3 = new FragmentPregunta3();
-        fragmentPregunta4 = new FragmentPregunta4();
-        fragmentPregunta5 = new FragmentPregunta5();
-        fragmentError = new FragmentError();
-        changeFragment(fragmentInicial);
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
+        Intent pantallaInicial = new Intent(this, MainActivity.class);
+        startActivity(pantallaInicial, options.toBundle());
     }
 
 
