@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentPregunta2">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="98dp"
+        android:layout_gravity="top"
+        android:gravity="center"
+        android:text="@string/que_pokemon_tiene_como_ultima_evolucion_a_charizard"
+        android:textSize="30sp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="292dp"
+        android:layout_height="343dp"
+        android:layout_gravity="center"
+        android:gravity="top"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/squirtle"
+            android:layout_width="148dp"
+            android:layout_height="152dp"
+            android:button="@null"
+            android:onClick="comprobar"
+            android:textAlignment="center"
+            android:drawableTop="@drawable/squirtle"
+            android:text="Squirtle" />
+
+        <RadioButton
+            android:id="@+id/bulbasur"
+            android:layout_width="143dp"
+            android:layout_height="146dp"
+            android:button="@null"
+            android:onClick="comprobar"
+            android:drawableTop="@drawable/bulbasur"
+            android:text="Bulbasur"
+            android:textAlignment="center" />
+
+        <!-- Agrega más RadioButtons con imágenes aquí -->
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="292dp"
+        android:layout_height="343dp"
+        android:layout_gravity="center"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/mew"
+            android:layout_width="151dp"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableTop="@drawable/mew"
+            android:onClick="comprobar"
+            android:text="Mew"
+            android:textAlignment="center" />
+
+        <RadioButton
+            android:id="@+id/charmander"
+            android:layout_width="142dp"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableTop="@drawable/charman"
+            android:onClick="comprobar"
+            android:text="Charmander"
+            android:textAlignment="center" />
+
+        <!-- Agrega más RadioButtons con imágenes aquí -->
+
+    </RadioGroup>
+
+</FrameLayout>

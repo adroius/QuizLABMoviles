@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentPregunta3">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="98dp"
+        android:layout_gravity="top"
+        android:gravity="center"
+        android:text="@string/cuantos_pokemons_habia_en_la_primera_pokedex"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="333dp"
+        android:layout_height="57dp"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:background="@drawable/roca"
+        android:gravity="center"
+        android:hint="@string/valor"
+        android:inputType="number"
+        android:onClick="comprobar" />
+</FrameLayout>

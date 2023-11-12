@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentPregunta5">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="98dp"
+        android:layout_gravity="top"
+        android:gravity="center"
+        android:text="@string/que_tipo_podria_a_ganar_a_un_pokemon_de_tipo_roca"
+        android:textSize="30sp" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="297dp"
+        android:layout_height="58dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/custom_radio_unchecked_color"
+        android:backgroundTintMode="add"
+        android:background="@color/white"
+        android:foregroundTint="@color/white"
+        android:gravity="center"
+        android:outlineAmbientShadowColor="@color/black"
+        android:outlineProvider="paddedBounds" />
+
+</FrameLayout>
