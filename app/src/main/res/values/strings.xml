@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name" translatable="false">QuizLABMoviles</string>
+    <string name="quiz_del_pokemon" translatable="false">Quiz del Pokemon</string>
+    <string name="todo" translatable="false">TODO</string>
+    <string name="quiz_pokemon" translatable="false">QUIZ Pokemon</string>
+    <string name="empezar_quiz" translatable="false">Empezar QUIZ</string>
+    <string name="cuanto_sabes_de_pokemons" translatable="false">¿Cuanto sabes de pokemons?</string>
+    <string name="volver_al_menu_inicial" translatable="false">Volver al menu inicial</string>
+    <string name="me_he_pasado_el_frente_batalla_100_veces" translatable="false">Me he pasado el frente batalla 100 veces</string>
+    <string name="eso_es_un_juego_verdad" translatable="false">¿Eso es un juego verdad?</string>
+    <string name="no_se_ni_que_es_un_pokemon" translatable="false">No se ni que es un pokemon</string>
+    <string name="bulbasur">Bulbasur</string>
+    <string name="mew">Mew</string>
+    <string name="picachu">Picachu</string>
+    <string name="onix">Onix</string>
+    <string name="siguiente">siguiente</string>
+    <string name="menu_principal">Menu Principal</string>
+    <string name="resultado">Resultado</string>
+    <string name="puntuacionString">"La puntuación obtenida es: "</string>
+    <string name="salir">Salir</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="squirtle" />
+    <string name="mew2">mew2</string>
+    <string name="que_pokemon_tiene_como_ultima_evolucion_a_charizard">¿Que pokemon tiene como ultima evolucion a Charizard?</string>
+    <string name="cu_l_es_el_primer_maestro_de_gimnasio_del_pokemon_rojo">¿Cuál es el primer maestro de gimnasio del pokemon Rojo?</string>
+    <string name="cuantos_pokemons_habia_en_la_primera_pokedex">¿Cuantos pokemons habia en la primera pokedex?</string>
+    <string name="cuantas_evoluciones_tiene_eevee">¿Cuantas evoluciones tiene Eevee?</string>
+    <string name="que_tipo_podria_a_ganar_a_un_pokemon_de_tipo_roca">¿Que tipo podria a ganar a un pokemon de tipo roca?</string>
+    <string name="error">Respuesta incorrecta.</string>
+    <string name="continuar">Continuar</string>
+    <string name="reiniciar">Reiniciar</string>
+    <string name="valor">Escriba aquí únicamente el número</string>
+    <string name="fallo">Fallo</string>
+    <string name="type">Imagen del Tipo</string>
+    <string name="title_activity_navigation">Navigation</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="reiniciar_quiz">REINICIAR QUIZ</string>
+</resources>
