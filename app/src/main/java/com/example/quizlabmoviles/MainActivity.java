@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private FragmentPregunta4 fragmentPregunta4;
     private FragmentPregunta5 fragmentPregunta5;
     private FragmentError fragmentError;
-
     private int puntuacion = 0;
     private int numberFragment = 1;
 
@@ -132,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.containerFragment, fragment).commit();
     }
+
 
     public void comenzar(View view) {
         numberFragment = 1;
