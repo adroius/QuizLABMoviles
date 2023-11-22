@@ -7,7 +7,10 @@ import androidx.fragment.app.FragmentManager;
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.media.AudioAttributes;
+import android.media.SoundPool;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -18,11 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.quizlabmoviles.databinding.PantallaAyudaBinding;
-
 public class MainActivity extends AppCompatActivity {
 
-    private FragmentInicial fragmentInicial;
     private FragmentPregunta1 fragmentPregunta1;
     private FragmentPregunta2 fragmentPregunta2;
     private FragmentPregunta3 fragmentPregunta3;
@@ -32,14 +32,17 @@ public class MainActivity extends AppCompatActivity {
     private int puntuacion = 0;
     private int numberFragment = 1;
 
+    SoundPool sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pregunta);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.quiz_del_pokemon);
+        toolbar.setLogo(R.drawable.ic_launcher_foreground);
         setSupportActionBar(toolbar);
-        fragmentInicial = new FragmentInicial();
+        FragmentInicial fragmentInicial = new FragmentInicial();
         fragmentPregunta1 = new FragmentPregunta1();
         fragmentPregunta2 = new FragmentPregunta2();
         fragmentPregunta3 = new FragmentPregunta3();
@@ -47,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
         fragmentPregunta5 = new FragmentPregunta5();
         fragmentError = new FragmentError();
         changeFragment(fragmentInicial);
+        sp = new SoundPool.Builder().build();
+        sp.setOnLoadCompleteListener((soundPool, sampleId, status) -> {
+            if (status == 0)
+                sp.play(sampleId, 1.0f, 1.0f, 0, 0, 1.0f);
+            else
+                Log.e("SoundPool", "Fallo al cargar SoundPool");
+        });
+        sp.load(this, R.raw.sound_start, 1);
     }
 
     @SuppressLint("SetTextI18n")
@@ -69,53 +80,34 @@ public class MainActivity extends AppCompatActivity {
         startActivity(pantallaInicial, options.toBundle());
     }
 
-
     public void comprobar(View view) {
         switch (numberFragment) {
             case 1:
                 RadioButton radioButton = findViewById(R.id.radioBrok);
                 numberFragment++;
-                if (radioButton.isChecked()) {
-                    puntuacion += 3;
-                    radioButton.setChecked(false);
-                    Toast.makeText(this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
-                    onClickNext(view);
-                } else {
-                    RadioButton radioButtonError = findViewById(view.getId());
-                    radioButtonError.setChecked(false);
-                    puntuacion -= 2;
-                    Toast.makeText(this,"La respuesta correcta es: Brok", Toast.LENGTH_LONG).show();
-                    refreshScore();
-                    changeFragment(fragmentError);
+                if (radioButton.isChecked())
+                    corrected(view);
+                else {
+                    radioButton = findViewById(view.getId());
+                    failed("La respuesta correcta es: Brok");
                 }
+                radioButton.setChecked(false);
                 break;
             case 2:
                 radioButton = findViewById(R.id.charmander);
                 numberFragment++;
-                if (radioButton.isChecked()) {
-                    puntuacion += 3;
-                    Toast.makeText(this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
-                    onClickNext(view);
-                } else {
-                    puntuacion -= 2;
-                    Toast.makeText(this, "La respuesta correcta es: Charmander", Toast.LENGTH_LONG).show();
-                    refreshScore();
-                    changeFragment(fragmentError);
-                }
+                if (radioButton.isChecked())
+                    corrected(view);
+                else
+                    failed("La respuesta correcta es: Charmander");
                 break;
             case 3:
                 EditText editText = findViewById(R.id.editTextNumber);
                 numberFragment++;
-                if (String.valueOf(editText.getText()).equals("151")) {
-                    puntuacion += 3;
-                    Toast.makeText(this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
-                    onClickNext(view);
-                } else {
-                    puntuacion -= 2;
-                    Toast.makeText(this, "La respuesta correcta es: 151", Toast.LENGTH_LONG).show();
-                    refreshScore();
-                    changeFragment(fragmentError);
-                }
+                if (String.valueOf(editText.getText()).equals("151"))
+                    corrected(view);
+                else
+                    failed("La respuesta correcta es: 151");
                 editText.setText("");
                 break;
             case 4:
@@ -123,41 +115,43 @@ public class MainActivity extends AppCompatActivity {
                 ArrayAdapter<String> adapter = (ArrayAdapter<String>) listView.getAdapter();
                 String selectedListItem = adapter.getItem(listView.getCheckedItemPosition());
                 numberFragment++;
-                if (selectedListItem != null && selectedListItem.equalsIgnoreCase("7")) {
-                    puntuacion += 3;
-                    Toast.makeText(this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
-                    onClickNext(view);
-                } else {
-                    puntuacion -= 2;
-                    Toast.makeText(this, "La respuesta correcta es: 7", Toast.LENGTH_LONG).show();
-                    refreshScore();
-                    changeFragment(fragmentError);
-                }
+                if (selectedListItem != null && selectedListItem.equalsIgnoreCase("7"))
+                    corrected(view);
+                else
+                    failed("La respuesta correcta es: 7");
                 break;
             case 5:
                 Spinner spinner = findViewById(R.id.spinner);
                 SpinnerItem selectedOption = (SpinnerItem) spinner.getSelectedItem();
                 numberFragment++;
-                if (selectedOption.getText().equalsIgnoreCase("Agua")) {
-                    puntuacion += 3;
-                    Toast.makeText(this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
-                    onClickNext(view);
-                } else {
-                    puntuacion -= 2;
-                    Toast.makeText(this, "La respuesta correcta es: Agua", Toast.LENGTH_LONG).show();
-                    refreshScore();
-                    changeFragment(fragmentError);
-                }
+                if (selectedOption.getText().equalsIgnoreCase("Agua"))
+                    corrected(view);
+                else
+                    failed("La respuesta correcta es: Agua");
                 spinner.setSelection(0);
                 break;
         }
+    }
+
+    private void corrected(View view) {
+        sp.load(this, R.raw.sound_correct, 1);
+        puntuacion += 3;
+        Toast.makeText(this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
+        onClickNext(view);
+    }
+
+    private void failed(String frase) {
+        sp.load(this, R.raw.sound_fail, 1);
+        puntuacion -= 2;
+        Toast.makeText(this, frase, Toast.LENGTH_LONG).show();
+        refreshScore();
+        changeFragment(fragmentError);
     }
 
     private void changeFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.containerFragment, fragment).commit();
     }
-
 
     public void comenzar(View view) {
         numberFragment = 1;
@@ -169,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void refreshScore() {
         TextView textView = findViewById(R.id.puntuacionId);
-        textView.setText("Puntuación: " + String.valueOf(puntuacion));
+        textView.setText("Puntuación: " + puntuacion);
     }
 
     public void onClickNext(View view) {
@@ -194,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void finalScreen() {
+        sp.load(this, R.raw.sound_clapping, 1);
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         Intent pantallaFinal = new Intent(this, FinalActivity.class);
         pantallaFinal.putExtra("puntuacion", puntuacion);
