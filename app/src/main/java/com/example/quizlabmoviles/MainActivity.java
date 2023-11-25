@@ -203,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.listQuestionDB);
         ArrayAdapter<String> adapter = (ArrayAdapter<String>) listView.getAdapter();
         String selectedListItem = adapter.getItem(listView.getCheckedItemPosition());
+        numberFragment++;
         if (selectedListItem != null && selectedListItem.equalsIgnoreCase(respuestaCorrecta)) {
             corrected(view);
         } else

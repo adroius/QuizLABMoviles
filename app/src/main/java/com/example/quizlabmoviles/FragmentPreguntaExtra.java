@@ -71,31 +71,26 @@ public class FragmentPreguntaExtra extends Fragment {
         View view = inflater.inflate(R.layout.fragment_pregunta_extra, container, false);
         ListView list = view.findViewById(R.id.listQuestionDB);
         List<String> answers;
-        AdminSQLite admin = new AdminSQLite(getContext(), "pregunta", null, 1);
-        SQLiteDatabase BdD = admin.getWritableDatabase();
-        int codigo = new Random().nextInt(4) + 1;
+        AdminSQLite admin = new AdminSQLite(getContext());
 
         // Obtener la pregunta Extra
-        DBPreguntas dbPreguntas = new DBPreguntas();
-        crearPreguntas(BdD, dbPreguntas);
-        Cursor result = dbPreguntas.selectQuestions(BdD,codigo);
-
-        TextView pregunta = (TextView) getView().findViewById(R.id.preguntaExtra);
-
-        if (result.moveToFirst()) {
-            pregunta.setText(result.getString(0));
-            respuestaCorrecta = result.getString(5);
+        Pregunta result=admin.obtenerPreguntaAleatoria();
+        
+        if (result!=null) {
+            TextView pregunta = view.findViewById(R.id.preguntaExtra);
+            pregunta.setText(result.getPregunta());
+            respuestaCorrecta = result.getRespuestaCorrecta();
             answers = new ArrayList<>();
-            answers.add(result.getString(1));
-            answers.add(result.getString(2));
-            answers.add(result.getString(3));
-            answers.add(result.getString(4));
+            answers.add(result.getRespuesta1());
+            answers.add(result.getRespuesta2());
+            answers.add(result.getRespuesta3());
+            answers.add(result.getRespuesta4());
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, answers);
 
             list.setAdapter(adapter);
         }
-        BdD.close();
+        //BdD.close();
         return view;
     }
 
@@ -110,19 +105,5 @@ public class FragmentPreguntaExtra extends Fragment {
                 ((MainActivity) getActivity()).comprobarExtra(respuestaCorrecta, getView());
             }
         });
-    }
-
-    private void crearPreguntas(SQLiteDatabase bdD, DBPreguntas dbPreguntas) {
-        dbPreguntas.createQuestions(bdD, 1,"¿Cuál es el Pokémon inicial que puedes elegir en la región de Kanto?"
-        ,"Charmander", "Squirtle", "Bulbasaur", "Pikachu", "Bulbasaur");
-
-        dbPreguntas.createQuestions(bdD, 2,"¿Qué tipo de Pokémon es Pikachu?"
-                ,"Agua", "Eléctrico", "Fuego", "Planta", "Eléctrico");
-
-        dbPreguntas.createQuestions(bdD, 3,"¿Cuál es el tipo de Pokémon de Eevee?"
-                ,"Normal", "Psíquico", "Hada", "Volador", "Normal");
-
-        dbPreguntas.createQuestions(bdD, 4,"¿Cuál es el nombre del Profesor Pokémon en la región de Johto?"
-                ,"Profesor Oak", "Profesor Elm", "Profesor Birch", "Profesor Rowan", "Profesor Elm");
     }
 }
