@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentManager;
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentPregunta4 fragmentPregunta4;
     private FragmentPregunta5 fragmentPregunta5;
     private FragmentError fragmentError;
+    private FragmentPreguntaExtra fragmentPreguntaExtra;
     private int puntuacion = 0;
     private int numberFragment = 1;
 
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentPregunta3 = new FragmentPregunta3();
         fragmentPregunta4 = new FragmentPregunta4();
         fragmentPregunta5 = new FragmentPregunta5();
+        fragmentPreguntaExtra = new FragmentPreguntaExtra();
         fragmentError = new FragmentError();
         changeFragment(fragmentInicial);
         sp = new SoundPool.Builder().build();
@@ -182,6 +183,9 @@ public class MainActivity extends AppCompatActivity {
                 changeFragment(fragmentPregunta5);
                 break;
             case 6:
+                changeFragment(fragmentPreguntaExtra);
+                break;
+            case 7:
                 finalScreen();
                 break;
         }
@@ -193,5 +197,15 @@ public class MainActivity extends AppCompatActivity {
         Intent pantallaFinal = new Intent(this, FinalActivity.class);
         pantallaFinal.putExtra("puntuacion", puntuacion);
         startActivity(pantallaFinal, options.toBundle());
+    }
+
+    public void comprobarExtra(String respuestaCorrecta, View view) {
+        ListView listView = findViewById(R.id.listQuestionDB);
+        ArrayAdapter<String> adapter = (ArrayAdapter<String>) listView.getAdapter();
+        String selectedListItem = adapter.getItem(listView.getCheckedItemPosition());
+        if (selectedListItem != null && selectedListItem.equalsIgnoreCase(respuestaCorrecta)) {
+            corrected(view);
+        } else
+            failed("La respuesta correcta es: " + respuestaCorrecta);
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentPregunta1">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/preguntaExtra"
+        android:layout_width="match_parent"
+        android:layout_height="98dp"
+        android:textSize="30sp" />
+
+    <ListView
+        android:id="@+id/listQuestionDB"
+        android:layout_width="284dp"
+        android:layout_height="292dp"
+        android:layout_gravity="center"
+        android:choiceMode="singleChoice"
+        android:gravity="center" />
+</FrameLayout>
