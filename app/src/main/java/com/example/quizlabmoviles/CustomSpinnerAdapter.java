@@ -13,8 +13,7 @@ import androidx.annotation.NonNull;
 import java.util.List;
 
 public class CustomSpinnerAdapter extends ArrayAdapter<SpinnerItem> {
-    private Context context;
-    private List<SpinnerItem> items;
+    private final Context context;
 
     public CustomSpinnerAdapter(Context context, List<SpinnerItem> items) {
         super(context, 0, items);

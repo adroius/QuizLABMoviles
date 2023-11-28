@@ -1,8 +1,5 @@
 package com.example.quizlabmoviles;
 
-import androidx.fragment.app.Fragment;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,7 +74,7 @@ public class FragmentPreguntaExtra extends Fragment {
 
         // Obtener la pregunta Extra
         Pregunta result=admin.obtenerPreguntaAleatoria();
-        
+
         if (result!=null) {
             TextView pregunta = view.findViewById(R.id.preguntaExtra);
             pregunta.setText(result.getPregunta());
@@ -86,7 +85,7 @@ public class FragmentPreguntaExtra extends Fragment {
             answers.add(result.getRespuesta3());
             answers.add(result.getRespuesta4());
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, answers);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, answers);
 
             list.setAdapter(adapter);
         }
@@ -97,12 +96,12 @@ public class FragmentPreguntaExtra extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        ListView list = getView().findViewById(R.id.listQuestionDB);
+        ListView list = requireView().findViewById(R.id.listQuestionDB);
         list.setClickable(true);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ((MainActivity) getActivity()).comprobarExtra(respuestaCorrecta, getView());
+                ((MainActivity) requireActivity()).comprobarExtra(respuestaCorrecta, getView());
             }
         });
     }

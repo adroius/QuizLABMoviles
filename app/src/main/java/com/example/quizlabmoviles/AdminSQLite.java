@@ -8,9 +8,7 @@ import android.database.Cursor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
-import java.util.Collections;
 
 public class AdminSQLite extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "miBaseDeDatos";
@@ -51,7 +49,7 @@ public class AdminSQLite extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public long insertPregunta(String pregunta, String respuesta1, String respuesta2, String respuesta3,
+    public void insertPregunta(String pregunta, String respuesta1, String respuesta2, String respuesta3,
                                String respuesta4, String respuestaCorrecta) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -62,9 +60,8 @@ public class AdminSQLite extends SQLiteOpenHelper {
         values.put(COLUMN_RESPUESTA4, respuesta4);
         values.put(COLUMN_RESPUESTA_CORRECTA, respuestaCorrecta);
 
-        long newRowId = db.insert(TABLE_NAME, null, values);
+        db.insert(TABLE_NAME, null, values);
         db.close();
-        return newRowId;
     }
 
     // Método para obtener una pregunta aleatoria de la base de datos
