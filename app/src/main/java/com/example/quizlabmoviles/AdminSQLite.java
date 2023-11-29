@@ -40,7 +40,7 @@ public class AdminSQLite extends SQLiteOpenHelper {
                 COLUMN_RESPUESTA4 + " TEXT, " +
                 COLUMN_RESPUESTA_CORRECTA + " TEXT)";
         miBBDD.execSQL(createTableQuery);
-        crearPreguntas();
+        crearPreguntas(miBBDD);
     }
 
     @Override
@@ -49,9 +49,8 @@ public class AdminSQLite extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void insertPregunta(String pregunta, String respuesta1, String respuesta2, String respuesta3,
+    public void insertPregunta(SQLiteDatabase miBBDD, String pregunta, String respuesta1, String respuesta2, String respuesta3,
                                String respuesta4, String respuestaCorrecta) {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_PREGUNTA, pregunta);
         values.put(COLUMN_RESPUESTA1, respuesta1);
@@ -60,8 +59,7 @@ public class AdminSQLite extends SQLiteOpenHelper {
         values.put(COLUMN_RESPUESTA4, respuesta4);
         values.put(COLUMN_RESPUESTA_CORRECTA, respuestaCorrecta);
 
-        db.insert(TABLE_NAME, null, values);
-        db.close();
+        miBBDD.insert(TABLE_NAME, null, values);
     }
 
     // Método para obtener una pregunta aleatoria de la base de datos
@@ -113,50 +111,50 @@ public class AdminSQLite extends SQLiteOpenHelper {
         return preguntas.isEmpty() ? null : preguntas.get(0);
     }
 
-    private void crearPreguntas() {
-        insertPregunta(
+    private void crearPreguntas(SQLiteDatabase miBBDD) {
+        insertPregunta(miBBDD,
                 "¿Cuál es el Pokémon inicial que puedes elegir en la región de Kanto?",
                 "Charmander", "Squirtle", "Bulbasaur", "Pikachu", "Bulbasaur"
         );
 
 // Insertar pregunta 2
-        insertPregunta(
+        insertPregunta(miBBDD,
                 "¿Qué tipo de Pokémon es Pikachu?",
                 "Agua", "Eléctrico", "Fuego", "Planta", "Eléctrico"
         );
 
 // Insertar pregunta 3
-        insertPregunta(
+        insertPregunta(miBBDD,
                 "¿Cuál es el tipo de Pokémon de Eevee?",
                 "Normal", "Psíquico", "Hada", "Volador", "Normal"
         );
 
 // Insertar pregunta 4
-        insertPregunta(
+        insertPregunta(miBBDD,
                 "¿Cuál es el nombre del Profesor Pokémon en la región de Johto?",
                 "Profesor Oak", "Profesor Elm", "Profesor Birch", "Profesor Rowan", "Profesor Elm"
         );
         // Insertar pregunta 5
-        insertPregunta(
+        insertPregunta(miBBDD,
                 "¿Qué tipo de Pokémon es Gyarados?",
                 "Agua/Volador", "Agua/Dragón", "Agua/Siniestro", "Agua/Eléctrico", "Agua/Dragón"
         );
 
 // Insertar pregunta 6
-        insertPregunta(
+        insertPregunta(miBBDD,
                 "¿Cuántas evoluciones tiene Bulbasaur?",
                 "Una", "Dos", "Tres", "Cuatro", "Tres"
         );
 
 // Insertar pregunta 7
-        insertPregunta(
+        insertPregunta(miBBDD,
                 "¿Cuál es el Pokémon legendario que representa el trío de las aves en la región de Kanto?",
                 "Articuno", "Zapdos", "Moltres", "Lugia", "Articuno"
         );
 
 // Insertar pregunta 8
 
-        insertPregunta(
+        insertPregunta(miBBDD,
                 "¿En qué tipo se especializa la Líder de Gimnasio Misty?",
                 "Agua", "Fuego", "Planta", "Eléctrico", "Agua"
         );
